@@ -3,6 +3,6 @@ category=other
 name=VirtualBox Manager
 os_support=*-linux
 library=vboxctrl-lib.pl
-version=4.1.0.a modified
+version=4.2.0.a modified
 longdesc=Manage Virtual Machines from VirtualBox
 
