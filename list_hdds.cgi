@@ -57,13 +57,8 @@ foreach my $HD (sort keys %HDs)
 	#print "<b>$USER - $HDHASH</b><br>";
 	
 	#my $VM = $HDs{$HD}->{'Usage'};
-<<<<<<< HEAD
 	my $CURRSIZE = $HDINFO{'Size on disk'};
 	my $LOGSIZE = $HDINFO{'Capacity'};
-=======
-	my $CURRSIZE = $HDINFO{'Current size on disk'};
-	my $LOGSIZE = $HDINFO{'Logical size'};
->>>>>>> c52ed7c0442b886300806f9ab4cb9a3076e10802
 	my $UUID = $HDINFO{'UUID'};
 	my $FORMAT = $HDINFO{'Storage format'};
 	my $TYPE = $HDINFO{'Type'};
