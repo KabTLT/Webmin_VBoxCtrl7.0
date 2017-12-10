@@ -48,7 +48,11 @@ foreach my $KEY (sort keys %DVDs)
 	my ($USER,$VM,$LOCATION) = split(":" , $KEY);
 	
 	my $UUID = $DVDs{$KEY}->{'UUID'};
+<<<<<<< HEAD
 	my $FORMAT = $DVDs{$KEY}->{'Storage format'};
+=======
+	my $FORMAT = $DVDs{$KEY}->{'Format'};
+>>>>>>> c52ed7c0442b886300806f9ab4cb9a3076e10802
 	my $LOCATION = $DVDs{$KEY}->{'Location'};
 	my $STATE = $DVDs{$KEY}->{'State'};
 	my $TYPE = $DVDs{$KEY}->{'Type'};
