@@ -17,7 +17,6 @@ my %HDs = ListHDDS();
 my (@TD) = (
 		"width='1%'",
 		"width='1%'",
-		"width='1%'",
 		"width='7%' align='left'",
 		"width='1%' align='center'",
 		"width='7%' align='right'",
@@ -28,7 +27,6 @@ my (@TD) = (
 my (@TABHEAD) = (
 		$text{''},
 		$text{'tabhead_hduser'},
-		$text{'tabhead_hdusedby'},
 		$text{'tabhead_hd'},
 		$text{'tabhead_hdformat'},
 		$text{'tabhead_hdcurrsize'},
@@ -56,7 +54,6 @@ foreach my $HD (sort keys %HDs)
 	
 	#print "<b>$USER - $HDHASH</b><br>";
 	
-	#my $VM = $HDs{$HD}->{'Usage'};
 	my $CURRSIZE = $HDINFO{'Size on disk'};
 	my $LOGSIZE = $HDINFO{'Capacity'};
 	my $UUID = $HDINFO{'UUID'};
@@ -86,7 +83,6 @@ foreach my $HD (sort keys %HDs)
 	my (@TABDATA);
 	
 	push(@TABDATA , $USER);
-	push (@TABDATA, $VM);
 	push (@TABDATA, $FILENAME);
 	push (@TABDATA, $FORMAT);
 #	if ($VM eq "none")
@@ -104,17 +100,8 @@ foreach my $HD (sort keys %HDs)
 	push (@TABDATA, $TYPE);
 	push (@TABDATA, $LOCATION);
 	
-	if ($VM)
-		{
-		# show default row
-		unshift (@TABDATA , " ");
-		print ui_columns_row(\@TABDATA,\@TD);
-		}
-	else
-		{
-		# show checked row
-		print ui_checked_columns_row(\@TABDATA,\@TD,"vmhd",$HD);
-		}
+	# show checked row
+	print ui_checked_columns_row(\@TABDATA,\@TD,"vmhd",$HD);
 	}
 
 print &ui_columns_end();

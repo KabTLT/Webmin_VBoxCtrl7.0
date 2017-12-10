@@ -16,7 +16,6 @@ my %DVDs = GetAllDVDS();
 
 my (@TD) = (
 		"width='5%' align='center'",
-		"width='5%' align='center'",
 		"width='10%' align='left'",
 		"width='1%' align='center'",
 		"width='1%'align='center'",
@@ -26,7 +25,6 @@ my (@TD) = (
 
 my (@TABHEAD) = (
 		$text{'tabhead_isouser'},
-		$text{'tabhead_isousedby'},
 		$text{'tabhead_isouuid'},
 		$text{'tabhead_isoformat'},
 		$text{'tabhead_isostate'},
@@ -52,22 +50,12 @@ foreach my $KEY (sort keys %DVDs)
 	my $LOCATION = $DVDs{$KEY}->{'Location'};
 	my $STATE = $DVDs{$KEY}->{'State'};
 	my $TYPE = $DVDs{$KEY}->{'Type'};
-	my @USAGE = split("<br>", $DVDs{$KEY}->{'Usage'});
 	my $NAME = $DVDs{$KEY}->{'Name'};
 	
 	$LOCATION = ($LOCATION)?$LOCATION:$NAME;
-	my $USAGE;
-	foreach my $DUMMY (@USAGE)
-		{
-		if ($DUMMY =~ /\(uuid\:+?/i)
-			{
-			$USAGE .= "$`<br>";
-			}
-		}
 	my (@TABDATA);
 	
 	push (@TABDATA, $USER);
-	push (@TABDATA, $USAGE);
 	push (@TABDATA , $UUID);
 	push (@TABDATA, $FORMAT);
 	push (@TABDATA , $STATE);
