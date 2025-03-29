@@ -1,3 +1,4 @@
+SEP_VBCONFIG=VBox options,11,
 PATH_VB_DEFAULTHDPATH=Pool-Directory for Standalone HardDisks: ,7
 multiuser=User Mode,4,0-root only,1-Multi User
 PATH_VB_BIN=Directory for VirtualBox binary: ,7
