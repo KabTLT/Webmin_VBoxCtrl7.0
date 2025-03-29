@@ -76,8 +76,8 @@ sub Read_NatXML
 		{
 		chomp;	# kein Newline	
 		s/#.*//;# keine Kommentare
-		s/^\s+//;# keine führende Whitespaces
-		s/\s+$//;# keine anhängenden Whitespaces
+		s/^\s+//;# keine fÃ¼hrende Whitespaces
+		s/\s+$//;# keine anhÃ¤ngenden Whitespaces
 		next unless length;# noch was da?
 		# Sektionen
 		#<Adapter slot="0" enabled="true" MACAddress="08002714900F" cable="true" speed="0" type="Am79C973"
@@ -194,8 +194,8 @@ sub Read_NatXML_
 		{
 		chomp;	# kein Newline	
 		s/#.*//;# keine Kommentare
-		s/^\s+//;# keine führende Whitespaces
-		s/\s+$//;# keine anhängenden Whitespaces
+		s/^\s+//;# keine fÃ¼hrende Whitespaces
+		s/\s+$//;# keine anhÃ¤ngenden Whitespaces
 		next unless length;# noch was da?
 		# Sektionen
 		if ( $_ =~ /macaddress=\"/i )
@@ -370,8 +370,8 @@ sub ReadEnabledVM
 			
 			foreach my $DUMMY (sort @RETURN)
 				{
-				$DUMMY =~ s/^\s+//;# keine führende Whitespaces
-				$DUMMY =~ s/\s+$//;# keine anhängenden Whitespaces
+				$DUMMY =~ s/^\s+//;# keine fÃ¼hrende Whitespaces
+				$DUMMY =~ s/\s+$//;# keine anhÃ¤ngenden Whitespaces
 				
 				if ($DUMMY)
 					{
@@ -472,9 +472,9 @@ sub GetHDDsFromVM_
 		if ($UUID =~ /^$USER\:/i)
 			{
 			#print "KEY: $UUID<br>";
-			#print "=> ".%HDDS->{$UUID}->{'State'}."<br>";
-			#print "=> ".%HDDS->{$UUID}->{'UUID'}."<br>";
-			#print "=> ".%HDDS->{$UUID}->{'Usage'}."<br>";
+			#print "=> ".$HDDS->{$UUID}->{'State'}."<br>";
+			#print "=> ".$HDDS->{$UUID}->{'UUID'}."<br>";
+			#print "=> ".$HDDS->{$UUID}->{'Usage'}."<br>";
 			
 			my $HDUUID = $HDDS->{$UUID}->{'UUID'};
 			my $USAGE = $HDDS->{$UUID}->{'Usage'};
@@ -1355,8 +1355,8 @@ sub GetControllerMatrix
 	while (<XML> )
 		{
 		chomp;			# kein Newline	
-		s/^\s+//;		# keine führende Whitespaces
-		s/\s+$//;		# keine anhängenden Whitespaces
+		s/^\s+//;		# keine fÃ¼hrende Whitespaces
+		s/\s+$//;		# keine anhÃ¤ngenden Whitespaces
 		next unless length;	# noch was da?
 		# Sektionen
 		
@@ -1478,8 +1478,8 @@ sub GetControllerMatrix_
 		if ($DUMMY =~ /^Storage Controller Name/g)
 			{
 			my $NAME = $INFO->{$DUMMY};
-			$NAME =~ s/^\s+//;# keine führende Whitespaces
-			$NAME =~ s/\s+$//;# keine anhängenden Whitespaces
+			$NAME =~ s/^\s+//;# keine fÃ¼hrende Whitespaces
+			$NAME =~ s/\s+$//;# keine anhÃ¤ngenden Whitespaces
 			my $z = 0;
 			# loop over all possible Controller items
 			foreach my $XX (@CONTROLLER)
