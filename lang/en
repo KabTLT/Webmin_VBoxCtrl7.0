@@ -6,7 +6,9 @@ tabhead_comment=VM Descr.
 tabhead_vmos=OS
 tabhead_vmvrdp=VRDE<br>(Port)
 tabhead_vmstate=Current state
-tabhead_vmaction=Action
+tabhead_vmaction=Start (Stop) VM
+tabhead_vmstart=Start VM
+tabhead_vmstop=Stop VM
 tabhead_currentuser=user logged in
 tabhead_info=showvminfo
 tabhead_infodesc=settings
@@ -268,8 +270,8 @@ CONFIRM_VM_DELETE=Do you really wont to delete VM '$1' ?
 butt_vmdel_yes= Only unregister VM (keep HD-Files) 
 butt_vmfulldel= Delete all files 
 butt_vmdel_no= Cancel 
+butt_vmstart= Start VM
+butt_vmstop= Stop VM
 
 VM_DISABLE=Delete VM $1 from $2.
 VM_ENABLE=Add VM $1 to $2.
-
-
