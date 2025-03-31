@@ -23,39 +23,46 @@ my $HIDEMODULEINDEX = 1;
 my $HELP = "vboxctrl_help";
 ui_print_header(undef, $HEADER, "", $HELP, $SHOWCONFIG, $HIDEMODULEINDEX);
 
-#print "<b>'$remote_user'</b><br>";
 
-switch($in{'action'})
-	{
-	case "Start"
-		{
-		$RET = StartVM($USER,$VM);
-		}
-	case "Pause"
-		{
-		$RET = StopVM($USER,$VM,0);
-		}
-	case "Resume"
-		{
-		$RET = StopVM($USER,$VM,1);
-		}
-	case "Reset"
-		{
-		$RET = StopVM($USER,$VM,2);
-		}
-	case "PowerOff"
-		{
-		$RET = StopVM($USER,$VM,3);
-		}
-	case "SaveState"
-		{
-		$RET = StopVM($USER,$VM,4);
-		}
-	case "Stop"
-		{
-		$RET = StopVM($USER,$VM,5);
-		}
-	}
+#switch($in{'action'})
+	#{
+	#webmin_log("action"," (".$STATE.")",\%in);
+	#if ($DEBUGMODE)
+	#{
+	#print "COMMAND: $STATE - <br>RETURN: $VM<br>";
+	#}
+	#case "Start"
+		#{
+		#$RET = StartVM($USER,$VM);
+		#}
+	#case "Pause"
+		#{
+		#$RET = StopVM($USER,$VM,0);
+		#}
+	#case "Resume"
+		#{
+		#$RET = StopVM($USER,$VM,1);
+		#}
+	#case "Reset"
+		#{
+		#$RET = StopVM($USER,$VM,2);
+		#}
+	#case "PowerOff"
+		#{
+		#$RET = StopVM($USER,$VM,3);
+		#}
+	#case "SaveState"
+		#{
+		#$RET = StopVM($USER,$VM,4);
+		#}
+	#case "Stop"
+		#{
+		#$RET = StopVM($USER,$VM,5);
+		#}
+	#}
+
+
+
 
 if ($RET)
 	{
@@ -72,8 +79,8 @@ my (@TABS);
 
 my $formno = 0;
 
-push(@TABS, [ "host", $text{'TAB_HOST'},"index.cgi?mode=host"]);
 push(@TABS, [ "vm", $text{'TAB_VM'},"index.cgi?mode=vm"]);
+push(@TABS, [ "host", $text{'TAB_HOST'},"index.cgi?mode=host"]);
 push(@TABS, [ "import", $text{'TAB_IMPORT'},"index.cgi?mode=import"]);
 push(@TABS, [ "export", $text{'TAB_EXPORT'},"index.cgi?mode=export"]);
 #push(@TABS, [ "hdds", $text{'TAB_HDDS'},"index.cgi?mode=hdds"]);
@@ -81,13 +88,14 @@ push(@TABS, [ "export", $text{'TAB_EXPORT'},"index.cgi?mode=export"]);
 
 print &ui_tabs_start(\@TABS, "mode", $in{'mode'} || $TABS[0]->[0], 1);
 
+print &ui_tabs_start_tab("mode", "vm");
+VM();
+print &ui_tabs_end_tab("mode", "vm");
+
 print &ui_tabs_start_tab("mode", "host");
 Host();
 print &ui_tabs_end_tab("mode", "host");
 
-print &ui_tabs_start_tab("mode", "vm");
-VM();
-print &ui_tabs_end_tab("mode", "vm");
 
 print &ui_tabs_start_tab("mode", "import");
 ImportVM();
@@ -371,8 +379,8 @@ sub VM
 			$text{'tabhead_vmvrdp'},
 			$text{'tabhead_vmos'},
 			$text{'tabhead_vmstate'},
-			$text{'tabhead_vmaction'},
-			"",
+			$text{'tabhead_vmstart'},
+			$text{'tabhead_vmstop'},
 			"",
 			"",
 			"",
@@ -416,7 +424,6 @@ sub VM
 					foreach my $DUMMY2 (@VALS)
 						{
 						my ($KEY2,$VAL2) = split(":" , $DUMMY2);
-						
 						$KEY2 =~ s/^\s+//g;
 						$KEY2 =~ s/\s+$//g;
 						$VAL2 =~ s/^\s+//g;
@@ -615,73 +622,64 @@ sub VM
 			switch($STATE)
 				{
 				$STATE =~ /\(/;
-				
 				case /running/
 					{
 					push(@TABDATA,"<image src='images/up.gif.png' alt='$text{'img_on'}'><br>$`");
-					@DUMMY2 = SetButtons("1,0,1,0,0,0,0");
+				#	@DUMMY2 = SetButtons("1,0,1,0,0,0,0");
 					}
 				case /powered off/
 					{
 					push(@TABDATA,"<image src='images/down.gif.png' alt='$text{'img_off'}'><br>$`");
-					@DUMMY2 = SetButtons("0,1,1,1,1,1,1");
+				#	@DUMMY2 = SetButtons("0,1,1,1,1,1,1");
 					}
 				case /saved/
 					{
 					push(@TABDATA,"<image src='images/down.gif.png' alt='$text{'img_off'}'><br>$`");
-					@DUMMY2 = SetButtons("0,1,0,0,0,1,0");
+				#	@DUMMY2 = SetButtons("0,1,0,0,0,1,0");
 					}
 				case /paused/
 					{
 					push(@TABDATA,"<image src='images/paused.gif' alt='$text{'img_off'}'><br>$`");
-					@DUMMY2 = SetButtons("0,1,0,1,0,1,1");
+				#	@DUMMY2 = SetButtons("0,1,0,1,0,1,1");
 					}
 				case /restoring/
 					{
 					push(@TABDATA,"<image src='images/up.gif.png' alt='$text{'img_on'}'><br>$`");
-					@DUMMY2 = SetButtons("1,0,1,0,0,0,0");
+				#	@DUMMY2 = SetButtons("1,0,1,0,0,0,0");
 					}
 				case /starting/
 					{
 					push(@TABDATA,"<image src='images/up.gif.png' alt='$text{'img_on'}'><br>$`");
-					@DUMMY2 = SetButtons("1,0,1,0,0,0,0");
+				#	@DUMMY2 = SetButtons("1,0,1,0,0,0,0");
 					}
 				default:
 					{
 					push(@TABDATA,"<image src='images/blank.gif'><br>$`");
-					@DUMMY2 = SetButtons("0,0,0,0,0,0,0");
+				#	@DUMMY2 = SetButtons("0,0,0,0,0,0,0");
 					}
 				}
 			
-			#my @DUMMY2 = SetButtons("0,1,1,0,1,1,0");
+			
 			foreach my $DUMMY2 (@DUMMY2)
 				{
 				push(@TABDATA ,$DUMMY2);
 				}
 			
-			#window.confirm('Link folgen?');
-			
-			#push (@TABDATA, &ui_submit($text{'vmdel_title'}, "delete"));
-			push (@TABDATA ,"&nbsp;<a href='delete_vm.cgi?vm=$DUMMY&user=$USER&mode=1')'><img src='images/trash.png' border='0'></a>&nbsp;");
-			#push (@TABDATA, $USERS);
+			push (@TABDATA ,"&nbsp;<a href='control_vm.cgi?vm=$DUMMY&user=$USER&mode=Start')'><img src='images/up.gif.png'  border='2'> <br> Start VM </a>&nbsp;");
+			push (@TABDATA ,"&nbsp;<a href='control_vm.cgi?vm=$DUMMY&user=$USER&mode=Stop')'><img src='images/down.gif.png' border='2'> <br> Stop VM </a>&nbsp;");
 			
 			print ui_columns_row(\@TABDATA,\@TD);
-			
 			print &ui_form_end();
-			#}
 		}
+
 	
 	print &ui_columns_end();
 	print &ui_links_row(\@linksrow);
-	
 	print "<br>";
 	print "<a href='#' onclick=\"javascript:window.open('list_vms.cgi?print=1','popup', 'toolbar=0,width=840, height=600')\">";
 	print "<img src='images/printer.png' border='0'></a>";
 	print "<br>";
 	
-	
 	$formno++;
 	
 	}
-
-
